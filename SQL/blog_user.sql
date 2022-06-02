@@ -28,9 +28,8 @@ CREATE TABLE `user` (
   `password` varchar(45) NOT NULL,
   `name` varchar(45) NOT NULL,
   `email` varchar(45) DEFAULT NULL,
-  `birthdate` date NOT NULL,
   `roleId` int NOT NULL,
-  `status` bit(1) NOT NULL,
+  `status` int NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username_UNIQUE` (`username`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -42,7 +41,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'admin','123','admin',NULL,'1992-08-27',1,_binary ''),(2,'tung','123','tung',NULL,'1992-08-27',2,_binary '');
+INSERT INTO `user` VALUES (1,'admin','123','admin',NULL,1,1),(2,'tung','123','tung',NULL,2,1);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -55,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-06-01 21:31:43
+-- Dump completed on 2022-06-02 10:46:49
