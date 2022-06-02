@@ -10,6 +10,7 @@ public class User {
     private String email;
     private Date birthdate;
     private Role roleId;
+
     private int status;
 
     public User() {
