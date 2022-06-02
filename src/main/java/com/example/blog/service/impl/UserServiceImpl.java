@@ -59,8 +59,7 @@ public class UserServiceImpl implements UserService {
                 String name = rs.getString("name");
                 String email = rs.getString("email");
                 int roleId = rs.getInt("roleId");
-                String roleName = rs.getString("roleName");
-                Role role = new Role(roleId,roleName);
+                Role role = roleService.findById(roleId);
                 int status = rs.getInt("status");
                 user = new User(id, username, password,name,email,role,status);
             }
@@ -83,7 +82,6 @@ public class UserServiceImpl implements UserService {
                 String name = rs.getString("name");
                 String phone = rs.getString("phone");
                 int roleId = rs.getInt("roleId");
-                String roleName = rs.getString("roleName");
                 Role role = roleService.findById(roleId);
                 int status = rs.getInt("status");
                 users.add(new User(id, username, password,name,phone,role,status));
@@ -108,12 +106,11 @@ public class UserServiceImpl implements UserService {
                 String username = rs.getString("username");
                 String password = rs.getString("password");
                 String nameFind = rs.getString("name");
-                String phone = rs.getString("phone");
+                String email = rs.getString("email");
                 int roleId = rs.getInt("roleId");
-                String roleName = rs.getString("roleName");
-                Role role = new Role(roleId,roleName);
+                Role role = roleService.findById(roleId);
                 int status = rs.getInt("status");
-                users.add(new User(id,username,password,nameFind,phone,role,status));
+                users.add(new User(id,username,password,nameFind,email,role,status));
             }
         } catch (SQLException e) {
 
@@ -134,7 +131,6 @@ public class UserServiceImpl implements UserService {
                 String nameFind = rs.getString("name");
                 String email = rs.getString("email");
                 int roleId = rs.getInt("roleId");
-//                String roleName = rs.getString("roleName");
                 Role role = roleService.findById(roleId);
                 int status = rs.getInt("status");
                 user.add(new User(id,usernameFind,password,nameFind,email,role,status));
@@ -176,5 +172,28 @@ public class UserServiceImpl implements UserService {
             rowUpdated = preparedStatement.executeUpdate() > 0;
         }
         return rowUpdated;
+    }
+    public User findByUserNamePassword(String username,String password) {
+        User user = null;
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("select * from user where username like ? and password like ?");) {
+            preparedStatement.setString(1, username);
+            preparedStatement.setString(2,password);
+            System.out.println(preparedStatement);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String usr = rs.getString("username");
+                String pw = rs.getString("password");
+                String name = rs.getString("name");
+                String email = rs.getString("email");
+                int roleId = rs.getInt("roleId");
+                Role role = roleService.findById(roleId);
+                int status = rs.getInt("status");
+                user = new User(id, usr, pw,name,email,role,status);
+            }
+        } catch (SQLException e) {
+        }
+        return user;
     }
 }
