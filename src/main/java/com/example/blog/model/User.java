@@ -8,20 +8,17 @@ public class User {
     private String password;
     private String name;
     private String email;
-    private Date birthdate;
     private Role roleId;
     private int status;
-
     public User() {
     }
 
-    public User(int id, String username, String password, String name, String email, Date birthdate, Role roleId, int status) {
+    public User(int id, String username, String password, String name, String email, Role roleId, int status) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.name = name;
         this.email = email;
-        this.birthdate = birthdate;
         this.roleId = roleId;
         this.status = status;
     }
@@ -66,13 +63,6 @@ public class User {
         this.email = email;
     }
 
-    public Date getBirthdate() {
-        return birthdate;
-    }
-
-    public void setBirthdate(Date birthdate) {
-        this.birthdate = birthdate;
-    }
 
     public Role getRoleId() {
         return roleId;

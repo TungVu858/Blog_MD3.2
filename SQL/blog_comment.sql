@@ -26,7 +26,8 @@ CREATE TABLE `comment` (
   `id` int NOT NULL AUTO_INCREMENT,
   `userId` int NOT NULL,
   `postsId` int NOT NULL,
-  `date` datetime NOT NULL,
+  `commentDate` datetime NOT NULL,
+  `status` bit(1) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -37,7 +38,7 @@ CREATE TABLE `comment` (
 
 LOCK TABLES `comment` WRITE;
 /*!40000 ALTER TABLE `comment` DISABLE KEYS */;
-INSERT INTO `comment` VALUES (1,2,1,'2022-06-01 21:30:34');
+INSERT INTO `comment` VALUES (1,2,1,'2022-06-01 21:30:34',_binary '\0');
 /*!40000 ALTER TABLE `comment` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-06-01 21:31:43
+-- Dump completed on 2022-06-02 10:46:49
