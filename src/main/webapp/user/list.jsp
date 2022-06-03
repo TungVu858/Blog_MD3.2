@@ -67,7 +67,7 @@
     <form method="get">
         <a href="/users"><h1 style="display: inline">Quản lý nhân viên </h1></a>
         <input type="submit" value="search" name="action" style="display: inline; float: right">
-        <input type="text" name="name" placeholder="Nhập tên nhân viên mà bạn muốn tìm"
+        <input type="text" name="name"
                style="display: inline; float: right; width: 30%">
     </form>
     <table>
@@ -81,7 +81,6 @@
     <c:forEach items="${users}" var="i">
         <tr>
             <td>${i.username}</td>
-            <th></th>
             <td>${i.password}</td>
             <td> ${i.name}</td>
             <td>${i.email}</td>

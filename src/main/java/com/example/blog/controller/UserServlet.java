@@ -43,10 +43,26 @@ public class UserServlet extends HttpServlet {
                     throw new RuntimeException(e);
                 }
                 break;
+            case "search":
+                showSearchForm(request,response);
+                break;
             default:
                 showUserForm(request, response);
         }
 
+    }
+
+    private void showSearchForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/list.jsp");
+        String name = request.getParameter("name");
+        List<User> users = userService.findByName(name);
+        if(users.size()>0){
+            request.setAttribute("users", users);
+            requestDispatcher.forward(request, response);
+        }
+        else {
+            response.sendRedirect("/users");
+        }
     }
 
     private void unlock(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
