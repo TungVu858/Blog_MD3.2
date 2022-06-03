@@ -13,6 +13,7 @@ import java.util.List;
 
 public class PostsService implements com.example.blog.service.PostService {
     UserServiceImpl userService = new UserServiceImpl();
+
     protected Connection getConnection() {
         Connection connection = null;
         try {
@@ -53,25 +54,26 @@ public class PostsService implements com.example.blog.service.PostService {
         Post post = new Post();
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("select * from posts where id = ?");) {
-            preparedStatement.setInt(1,id);
+            preparedStatement.setInt(1, id);
             System.out.println(preparedStatement);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 int userId = rs.getInt("userId");
                 User user = userService.findById(userId);
                 String title = rs.getString("title");
-                String description=rs.getString("description");
+                String description = rs.getString("description");
                 String content = rs.getString("content");
                 String time = rs.getString("date");
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
                 LocalDateTime dateTime = LocalDateTime.parse(time, formatter);
                 int status = rs.getInt("status");
-                post=new Post(id,user,title,description,content,dateTime,status);
+                post = new Post(id, user, title, description, content, dateTime, status);
             }
         } catch (SQLException e) {
         }
         return post;
     }
+
     @Override
     public List<Post> findAll() {
         List<Post> posts = new ArrayList<>();
@@ -92,7 +94,7 @@ public class PostsService implements com.example.blog.service.PostService {
                 LocalDateTime dateTime = LocalDateTime.parse(time, formatter);
 
                 int status = rs.getInt("status");
-                posts.add(new Post(id,user,title,description,content,dateTime,status));
+                posts.add(new Post(id, user, title, description, content, dateTime, status));
             }
         } catch (SQLException e) {
         }
@@ -106,7 +108,7 @@ public class PostsService implements com.example.blog.service.PostService {
         try (Connection connection = getConnection();
 
              PreparedStatement preparedStatement = connection.prepareStatement("select * from posts where title like ?");) {
-            preparedStatement.setString(1, "%"+title+"%");
+            preparedStatement.setString(1, "%" + title + "%");
             System.out.println(preparedStatement);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
@@ -120,7 +122,7 @@ public class PostsService implements com.example.blog.service.PostService {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
                 LocalDateTime dateTime = LocalDateTime.parse(time, formatter);
                 int status = rs.getInt("status");
-                posts.add(new Post(id,user,titleFind,description,content,dateTime,status));
+                posts.add(new Post(id, user, titleFind, description, content, dateTime, status));
 
             }
         } catch (SQLException e) {
@@ -132,7 +134,7 @@ public class PostsService implements com.example.blog.service.PostService {
         List<Post> postList = new ArrayList<>();
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("select * from posts where userId?");) {
-            preparedStatement.setInt(1,userId);
+            preparedStatement.setInt(1, userId);
             System.out.println(preparedStatement);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
@@ -146,7 +148,7 @@ public class PostsService implements com.example.blog.service.PostService {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
                 LocalDateTime dateTime = LocalDateTime.parse(time, formatter);
                 int status = rs.getInt("status");
-                postList.add(new Post(id,userid,title,description,content,dateTime,status));
+                postList.add(new Post(id, userid, title, description, content, dateTime, status));
             }
         } catch (SQLException e) {
         }
@@ -179,10 +181,34 @@ public class PostsService implements com.example.blog.service.PostService {
             preparedStatement.setInt(6, post.getStatus());
             preparedStatement.setInt(7, post.getId());
 
-            update= preparedStatement.executeUpdate()>0;
+            update = preparedStatement.executeUpdate() > 0;
         }
         return update;
     }
 
+    public List<Post> findTop6PostTime() {
+        List<Post> postList = new ArrayList<>();
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("select * from posts oder by postDate");) {
+            System.out.println(preparedStatement);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String title = rs.getString("title");
+                int userId = rs.getInt("userId");
+                User userid = userService.findById(userId);
+                String description = rs.getString("description");
+                String content = rs.getString("content");
+                String time = rs.getString("date");
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                LocalDateTime dateTime = LocalDateTime.parse(time, formatter);
+                int status = rs.getInt("status");
+                postList.add(new Post(id, userid, title, description, content, dateTime, status));
+            }
+        } catch (SQLException e) {
+
+        }
+        return postList;
+    }
 
 }

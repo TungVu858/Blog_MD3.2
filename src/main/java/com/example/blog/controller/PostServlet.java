@@ -46,7 +46,6 @@ public class PostServlet extends HttpServlet {
             case " search":
                 search(request,response);
                 break;
-
             default :
                 showPost(request,response);
                 break;

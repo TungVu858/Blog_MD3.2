@@ -84,6 +84,8 @@ public class LoginServlet extends HttpServlet {
         int status = Integer.parseInt(request.getParameter("status"));
         userService.update(new User(currentId,username,password,name,email,role,status));
         session.setAttribute("name", name);
+        session.setAttribute("email",email);
+        session.setAttribute("password",password);
         response.sendRedirect("/");
     }
 
