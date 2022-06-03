@@ -43,15 +43,8 @@
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="text" name="email" id="email" class="form-control" value="${users.email}">
+                <input type="email" name="email" id="email" class="form-control" value="${users.email}">
             </div>
-<%--            <div class="form-group">--%>
-<%--                <label for="status">Trạng Thái</label>--%>
-<%--                <select id="status" name="status">--%>
-<%--                    <option value="1">Đang hoạt động</option>--%>
-<%--                    <option value="2">Bị khóa</option>--%>
-<%--                </select>--%>
-<%--            </div>--%>
             <input type="hidden" name="status" value="${users.status}">
             <input type="submit" value="Sửa" class="btn-primary btn-block btn">
         </form>

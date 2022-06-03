@@ -97,7 +97,7 @@ public class UserServiceImpl implements UserService {
     public List<User> findByName(String name) {
         List<User> users = new ArrayList<>();
         try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("select * from user where (roleId=2) and name like ? and status = 1; ");) {
+             PreparedStatement preparedStatement = connection.prepareStatement("select * from user where (roleId=2) and name like ? ");) {
             preparedStatement.setString(1, '%'+name+'%');
             System.out.println(preparedStatement);
             ResultSet rs = preparedStatement.executeQuery();

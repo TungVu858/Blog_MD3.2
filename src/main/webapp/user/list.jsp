@@ -11,16 +11,13 @@
 <head>
     <title>Title</title>
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
-
-    <!-- jQuery library -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
-
-    <!-- Popper JS -->
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-
-    <!-- Latest compiled JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="assets/css/main.css"/>
+    <noscript>
+        <link rel="stylesheet" href="assets/css/noscript.css"/>
+    </noscript>
 
 
 </head>
@@ -39,6 +36,7 @@
         <th> Tên</th>
         <th> Email</th>
         <th> Trạng Thái</th>
+        <th></th>
     </tr>
     <c:forEach items="${users}" var="i">
         <tr>
@@ -56,11 +54,9 @@
                 </c:if>
             </td>
             <td>
-                <a href="/users?action=edit&id=${i.id}" class="btn btn-secondary">Sửa</a>
-            </td>
-            <td>
-                    <%--                            <a href="/users?action=delete&id=${users.get(i).id}" class="btn btn-danger"--%>
-                    <%--                               onclick="acceptDelete(${users.get(i).id})">Xoá</a>--%>
+                <c:if test="${i.status==1}">
+                    <a href="/users?action=edit&id=${i.id}" class="btn btn-secondary">Sửa</a>
+                </c:if>
                 <c:if test="${i.status==1}">
                     <form action="/users" id="delete${i.id}" style="display: inline">
                         <input type="hidden" name="action" value="delete">
@@ -73,7 +69,7 @@
                     <form action="/users" id="unlock${i.id}" style="display: inline">
                         <input type="hidden" name="action" value="unlock">
                         <input type="hidden" name="id" value="${i.id}">
-                        <a class="btn btn-primary" onclick="acceptUnlock(${i.id})">Mở khóa tài khoản</a>
+                        <a class="btn btn-primary" onclick="acceptUnlock(${i.id})" style="color: white">Mở khóa tài khoản</a>
                     </form>
                 </c:if>
             </td>
@@ -82,7 +78,11 @@
 </table>
 <script>
     function acceptDelete(id) {
-        document.getElementById("delete" + id).submit();
+        if (confirm("Bạn có xác nhận khoá tài khoản này không")){
+            alert("Khoá thành công")
+            document.getElementById("delete" + id).submit();
+        }
+        else alert("Thất bại")
     }
 
     function acceptUnlock(id) {
