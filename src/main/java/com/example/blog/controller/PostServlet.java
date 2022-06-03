@@ -80,8 +80,6 @@ public class PostServlet extends HttpServlet {
 
     private void showCreateForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("blog/create.jsp");
-        List<Post> posts = postsService.findAll();
-        request.setAttribute("create",posts);
         requestDispatcher.forward(request,response);
 
 

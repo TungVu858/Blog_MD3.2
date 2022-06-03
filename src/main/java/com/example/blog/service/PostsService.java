@@ -34,14 +34,13 @@ public class PostsService implements com.example.blog.service.PostService {
         try (Connection connection = getConnection();
 
              PreparedStatement preparedStatement = connection.prepareStatement
-                     ("insert into posts (id,userId,title,description,content,date,status) value (?,?,?,?,?,?,?)");) {
-            preparedStatement.setInt(1, post.getId());
-            preparedStatement.setInt(2, post.getUserId().getId());
-            preparedStatement.setString(3, post.getTitle());
-            preparedStatement.setString(4, post.getDescription());
-            preparedStatement.setString(5, post.getContent());
-            preparedStatement.setString(6, String.valueOf(post.getPostDate()));
-            preparedStatement.setInt(7, post.getStatus());
+                     ("insert into posts (userId,title,description,content,date,status) value (?,?,?,?,?,?)");) {
+            preparedStatement.setInt(1, post.getUserId().getId());
+            preparedStatement.setString(2, post.getTitle());
+            preparedStatement.setString(3, post.getDescription());
+            preparedStatement.setString(4, post.getContent());
+            preparedStatement.setString(5, String.valueOf(post.getPostDate()));
+            preparedStatement.setInt(6, post.getStatus());
             preparedStatement.executeUpdate();
             System.out.println(preparedStatement);
 

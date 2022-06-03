@@ -18,7 +18,7 @@
         <h5> Tên tài khoản </h5>
         <span class="form-control" type="text" name="name">${name}</span><br>
         <h5>Title</h5>
-        <input type="hidden" name="userId" value="${roleId}">
+        <input type="hidden" name="userId" value="${userId}">
         <input type="text" name="title"><br>
         <h5>Description</h5>
         <input type="text" name="description"><br>
