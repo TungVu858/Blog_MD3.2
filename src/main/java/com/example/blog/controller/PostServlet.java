@@ -101,6 +101,15 @@ public class PostServlet extends HttpServlet {
     private void showPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("blog/post.jsp");
         List<Post> posts = postsService.findAll();
+        String title = request.getParameter("title");
+        if(title!=null){
+            posts = postsService.findByName(title);
+        }
+        String uId= request.getParameter("userId");
+
+        if(uId!=null){
+            posts = postsService.findByUserId(Integer.parseInt(uId));
+        }
         request.setAttribute("post",posts);
         requestDispatcher.forward(request,response);
 
