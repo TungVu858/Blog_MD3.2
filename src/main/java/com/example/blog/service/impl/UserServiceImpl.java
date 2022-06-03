@@ -59,8 +59,7 @@ public class UserServiceImpl implements UserService {
                 String name = rs.getString("name");
                 String email = rs.getString("email");
                 int roleId = rs.getInt("roleId");
-                String roleName = rs.getString("roleName");
-                Role role = new Role(roleId,roleName);
+                Role role = roleService.findById(roleId);
                 int status = rs.getInt("status");
                 user = new User(id, username, password,name,email,role,status);
             }
@@ -164,12 +163,11 @@ public class UserServiceImpl implements UserService {
     public boolean update(User user) throws SQLException {
         boolean rowUpdated;
         try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("update user set password=?,name=?,email =?,roleId=? where id=?;");) {
+             PreparedStatement preparedStatement = connection.prepareStatement("update user set password=?,name=?,email =? where id=?;");) {
             preparedStatement.setString(1,user.getPassword());
             preparedStatement.setString(2, user.getName());
             preparedStatement.setString(3, user.getEmail());
-            preparedStatement.setInt(4, user.getRoleId().getId());
-            preparedStatement.setInt(5, user.getId());
+            preparedStatement.setInt(4, user.getId());
             rowUpdated = preparedStatement.executeUpdate() > 0;
         }
         return rowUpdated;

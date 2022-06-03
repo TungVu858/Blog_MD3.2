@@ -43,7 +43,7 @@
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="text" name="email" id="email" class="form-control" value="${users.email}" required pattern="^[A-Za-z0-9+_.-]+@(.+)$" title="Nhập không đúng định dạng">
+                <input type="text" name="email" id="email" class="form-control" value="${users.email}">
             </div>
 <%--            <div class="form-group">--%>
 <%--                <label for="status">Trạng Thái</label>--%>

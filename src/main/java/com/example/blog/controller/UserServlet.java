@@ -118,8 +118,7 @@ public class UserServlet extends HttpServlet {
         String password = request.getParameter("password");
         String name = request.getParameter("name");
         String email = request.getParameter("email");
-        int status = Integer.parseInt(request.getParameter("status"));
-        userService.update(new User(id,password, name,email,status));
+        userService.update(new User(id,password, name,email));
         response.sendRedirect("/users");
     }
 }
