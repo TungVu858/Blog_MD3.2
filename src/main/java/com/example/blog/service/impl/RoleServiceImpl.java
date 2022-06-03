@@ -1,11 +1,9 @@
 package com.example.blog.service.impl;
 
 import com.example.blog.model.Role;
-import com.example.blog.model.User;
 import com.example.blog.service.RoleService;
 
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 
 

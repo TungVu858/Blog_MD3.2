@@ -11,6 +11,7 @@
     <title>$Title$</title>
   </head>
   <body>
-  <a href="registers">link</a>
+  $END$
+  <a href="/users">Click</a>
   </body>
 </html>

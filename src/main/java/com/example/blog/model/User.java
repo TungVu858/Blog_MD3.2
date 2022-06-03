@@ -9,8 +9,24 @@ public class User {
     private String name;
     private String email;
     private Role roleId;
+
     private int status;
     public User() {
+
+    }
+
+    public User(int id,String password, String name, String email) {
+        this.id = id;
+        this.password = password;
+        this.name = name;
+        this.email = email;
+    }
+
+    public User(String username, String password, String name, String email) {
+        this.username = username;
+        this.password = password;
+        this.name = name;
+        this.email = email;
     }
 
     public User(String username, String password, String name, String email, Role roleId, int status) {
