@@ -11,7 +11,11 @@
 <head>
     <title>Title</title>
 </head>
+
 <body>
+<c:if test="">
+
+</c:if>
 <form method="post"><h5> Tên tài khoản </h5>
     <span class="form-control" type="text" name="name">${name}</span><br>
     <input type="hidden" name="userId" value="${userId}">

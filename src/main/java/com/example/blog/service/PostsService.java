@@ -101,18 +101,18 @@ public class PostsService implements com.example.blog.service.PostService {
     }
 
     @Override
-    public List<Post> findByName(String name) {
+    public List<Post> findByName(String title) {
         List<Post> posts = new ArrayList<>();
 
         try (Connection connection = getConnection();
 
-             PreparedStatement preparedStatement = connection.prepareStatement("select * from posts where name like ?");) {
-            preparedStatement.setString(1, "%"+name+"%");
+             PreparedStatement preparedStatement = connection.prepareStatement("select * from posts where title like ?");) {
+            preparedStatement.setString(1, "%"+title+"%");
             System.out.println(preparedStatement);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("id");
-                String title = rs.getString("title");
+                String titleFind = rs.getString("title");
                 int userId = rs.getInt("userId");
                 User user = userService.findById(userId);
                 String description = rs.getString("description");
@@ -121,7 +121,7 @@ public class PostsService implements com.example.blog.service.PostService {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
                 LocalDateTime dateTime = LocalDateTime.parse(time, formatter);
                 int status = rs.getInt("status");
-                posts.add(new Post(id,user,title,description,content,dateTime,status));
+                posts.add(new Post(id,user,titleFind,description,content,dateTime,status));
 
             }
         } catch (SQLException e) {
@@ -179,7 +179,7 @@ public class PostsService implements com.example.blog.service.PostService {
             preparedStatement.setString(5, String.valueOf(post.getPostDate()));
             preparedStatement.setInt(6, post.getStatus());
             preparedStatement.setInt(7, post.getId());
-            preparedStatement.executeUpdate();
+
             update= preparedStatement.executeUpdate()>0;
         }
         return update;

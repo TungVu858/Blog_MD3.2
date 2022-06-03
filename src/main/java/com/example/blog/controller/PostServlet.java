@@ -54,11 +54,14 @@ public class PostServlet extends HttpServlet {
     }
 
     private void search(HttpServletRequest request, HttpServletResponse response) {
-
-        String key = request.getParameter("key");
+        String uId= request.getParameter("userId");
+        String title = request.getParameter("title");
         List<Post> postList = postsService.findAll();
-        if(key!=null){
-            postList = postsService.findByName(key);
+        if(title!=null){
+            postList = postsService.findByName(title);
+        }
+        if(uId!=null){
+            postList = postsService.findByUserId(Integer.parseInt(uId));
         }
         request.setAttribute("posts",postList);
 
