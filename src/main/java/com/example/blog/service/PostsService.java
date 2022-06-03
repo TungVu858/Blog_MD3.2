@@ -1,13 +1,18 @@
 package com.example.blog.service;
 
 import com.example.blog.model.Post;
+import com.example.blog.model.User;
+import com.example.blog.service.impl.UserServiceImpl;
 
 import java.sql.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 public class PostsService implements com.example.blog.service.PostService {
+    UserServiceImpl userService = new UserServiceImpl();
     protected Connection getConnection() {
         Connection connection = null;
         try {
@@ -54,56 +59,101 @@ public class PostsService implements com.example.blog.service.PostService {
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 int userId = rs.getInt("userId");
-
-
+                User user = userService.findById(userId);
+                String title = rs.getString("title");
+                String description=rs.getString("description");
+                String content = rs.getString("content");
+                String time = rs.getString("date");
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                LocalDateTime dateTime = LocalDateTime.parse(time, formatter);
+                int status = rs.getInt("status");
+                post=new Post(id,user,title,description,content,dateTime,status);
             }
         } catch (SQLException e) {
         }
         return post;
-
     }
-
     @Override
     public List<Post> findAll() {
         List<Post> posts = new ArrayList<>();
         try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("select * from posts");) {
+             PreparedStatement preparedStatement = connection.prepareStatement("select * from posts")) {
             System.out.println(preparedStatement);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("id");
                 String title = rs.getString("title");
-
+                int userId = rs.getInt("userId");
+                User user = userService.findById(userId);
                 String description = rs.getString("description");
                 String content = rs.getString("content");
-                LocalDate localDate = LocalDate.parse(rs.getString("postDate"));
+
+                String time = rs.getString("date");
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                LocalDateTime dateTime = LocalDateTime.parse(time, formatter);
+
                 int status = rs.getInt("status");
-
-
-
-
-
-
-//                int id = rs.getInt("id");
-//                int age = rs.getInt("age");
-//                String name = rs.getString("name");
-//                int classId = rs.getInt("cID");
-//                Class clazz = classService.findById(classId);
-//                students.add(new Student(id,name,age,clazz));
-
+                posts.add(new Post(id,user,title,description,content,dateTime,status));
             }
         } catch (SQLException e) {
         }
-
         return posts;
-
-
     }
 
     @Override
     public List<Post> findByName(String name) {
-        return null;
+        List<Post> posts = new ArrayList<>();
+
+        try (Connection connection = getConnection();
+
+             PreparedStatement preparedStatement = connection.prepareStatement("select * from posts where name like ?");) {
+            preparedStatement.setString(1, "%"+name+"%");
+            System.out.println(preparedStatement);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String title = rs.getString("title");
+                int userId = rs.getInt("userId");
+                User user = userService.findById(userId);
+                String description = rs.getString("description");
+                String content = rs.getString("content");
+                String time = rs.getString("date");
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                LocalDateTime dateTime = LocalDateTime.parse(time, formatter);
+                int status = rs.getInt("status");
+                posts.add(new Post(id,user,title,description,content,dateTime,status));
+
+            }
+        } catch (SQLException e) {
+        }
+        return posts;
     }
+
+    public List<Post> findByUserId(int userId) {
+        List<Post> postList = new ArrayList<>();
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("select * from posts where userId?");) {
+            preparedStatement.setInt(1,userId);
+            System.out.println(preparedStatement);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String title = rs.getString("title");
+//                int userId = rs.getInt("userId");
+                User userid = userService.findById(userId);
+                String description = rs.getString("description");
+                String content = rs.getString("content");
+                String time = rs.getString("date");
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                LocalDateTime dateTime = LocalDateTime.parse(time, formatter);
+                int status = rs.getInt("status");
+                postList.add(new Post(id,userid,title,description,content,dateTime,status));
+            }
+        } catch (SQLException e) {
+        }
+        return postList;
+    }
+
 
     @Override
     public boolean delete(int id) throws SQLException {
@@ -119,7 +169,21 @@ public class PostsService implements com.example.blog.service.PostService {
 
     @Override
     public boolean update(Post post) throws SQLException {
-
-        return false;
+        boolean update;
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = getConnection().prepareStatement("update posts set userId = ? , title = ?, description=?,content= ?, date =?,status=?  where id = ?");) {
+            preparedStatement.setInt(1, post.getUserId().getId());
+            preparedStatement.setString(2, post.getTitle());
+            preparedStatement.setString(3, post.getDescription());
+            preparedStatement.setString(4, post.getContent());
+            preparedStatement.setString(5, String.valueOf(post.getPostDate()));
+            preparedStatement.setInt(6, post.getStatus());
+            preparedStatement.setInt(7, post.getId());
+            preparedStatement.executeUpdate();
+            update= preparedStatement.executeUpdate()>0;
+        }
+        return update;
     }
+
+
 }
