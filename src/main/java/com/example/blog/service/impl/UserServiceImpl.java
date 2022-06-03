@@ -72,7 +72,7 @@ public class UserServiceImpl implements UserService {
     public List<User> findAll() {
         List<User> users = new ArrayList<>();
         try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("select * from user where (roleId=2) and status=1" );) {
+             PreparedStatement preparedStatement = connection.prepareStatement("select * from user where (roleId=2)" );) {
             System.out.println(preparedStatement);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
@@ -80,11 +80,11 @@ public class UserServiceImpl implements UserService {
                 String username = rs.getString("username");
                 String password = rs.getString("password");
                 String name = rs.getString("name");
-                String phone = rs.getString("phone");
+                String email = rs.getString("email");
                 int roleId = rs.getInt("roleId");
                 Role role = roleService.findById(roleId);
                 int status = rs.getInt("status");
-                users.add(new User(id, username, password,name,phone,role,status));
+                users.add(new User(id, username, password,name,email,role,status));
             }
         } catch (SQLException e) {
 
@@ -97,7 +97,7 @@ public class UserServiceImpl implements UserService {
     public List<User> findByName(String name) {
         List<User> users = new ArrayList<>();
         try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("select * from user where (roleId=2) and name like ? and status = 1; ");) {
+             PreparedStatement preparedStatement = connection.prepareStatement("select * from user where (roleId=2) and name like ? ");) {
             preparedStatement.setString(1, '%'+name+'%');
             System.out.println(preparedStatement);
             ResultSet rs = preparedStatement.executeQuery();
@@ -163,15 +163,25 @@ public class UserServiceImpl implements UserService {
     public boolean update(User user) throws SQLException {
         boolean rowUpdated;
         try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("update user set password=?,name=?,email =?,roleId=? where id=?;");) {
+             PreparedStatement preparedStatement = connection.prepareStatement("update user set password=?,name=?,email =? where id=?;");) {
             preparedStatement.setString(1,user.getPassword());
             preparedStatement.setString(2, user.getName());
             preparedStatement.setString(3, user.getEmail());
-            preparedStatement.setInt(4, user.getRoleId().getId());
-            preparedStatement.setInt(5, user.getId());
+            preparedStatement.setInt(4, user.getId());
             rowUpdated = preparedStatement.executeUpdate() > 0;
         }
         return rowUpdated;
+    }
+
+    @Override
+    public boolean unlock(User user) throws SQLException {
+        boolean rowUnlock;
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("update user set status=1 where id=?;");) {
+            preparedStatement.setInt(1, user.getId());
+            rowUnlock = preparedStatement.executeUpdate() > 0;
+        }
+        return rowUnlock;
     }
     public User findByUserNamePassword(String username,String password) {
         User user = null;

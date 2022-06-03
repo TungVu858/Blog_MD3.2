@@ -12,5 +12,6 @@
   </head>
   <body>
   $END$
+  <a href="/users">Click</a>
   </body>
 </html>
