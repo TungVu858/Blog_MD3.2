@@ -20,7 +20,7 @@ public class UserServiceImpl implements UserService {
         Connection connection = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/blog?useSSL=false", "root", "1234");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/blog?useSSL=false", "root", "123456");
         } catch (SQLException e) {
 
         } catch (ClassNotFoundException e) {
