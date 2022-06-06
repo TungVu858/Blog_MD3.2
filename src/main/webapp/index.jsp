@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Blog v2.2</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
           integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -19,11 +19,29 @@
 
         <!--        đăng nhập, đăng kí-->
         <c:if test="${username==null}">
-            <a href="/logins">Đăng nhập</a>
-            <a href="/registers">Đăng kí</a>
+            <div style="    margin-right: 2%;
+    float: right;
+    display: inline-block;">
+                <form action="/logins">
+                    <button class="btn btn-light">Đăng Nhập</button>
+                </form>
+            </div>
+            <div style="    margin-right: 10px;
+    display: inline-block;
+    float: right;">
+                <form action="/registers">
+                    <button class="btn btn-primary">Đăng Ký</button>
+                </form>
+            </div>
         </c:if>
         <c:if test="${username != null}">
-            <a href="/logins?action=logout">Đăng xuất</a>
+            <div style="    margin-right: 2%;
+    float: right;
+    display: inline-block;">
+                <form action="/logins?action=logout">
+                    <button class="btn btn-success">Đăng Xuất</button>
+                </form>
+            </div>
         </c:if>
     </nav>
 
@@ -36,9 +54,9 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/logins?action=view">${name}</a>
-                    </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logins?action=view">${name}</a>
+                </li>
                 <c:if test="${username != null}">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="/posts" id="navbarDropdown" role="button"
@@ -65,18 +83,17 @@
                     </li>
                 </c:if>
             </ul>
-<%--            <form class="form-inline my-2 my-lg-0 " method="get" action="posts">--%>
-<%--                        <input class="form-control mr-sm-2" type="search" placeholder="Nhập tiêu đề bạn muốn tìm" aria-label="Search" name="action=search">--%>
-<%--                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="${p.title}">Search</button>--%>
-<%--&lt;%&ndash;                <input type="submit" value="search" name="action" style="display: inline; float: right">&ndash;%&gt;--%>
-<%--&lt;%&ndash;                <input type="text" name="title"&ndash;%&gt;--%>
-<%--&lt;%&ndash;                       style="display: inline; float: right; width: 30%" placeholder="Nhập tiêu đề bạn muốn tìm">&ndash;%&gt;--%>
-<%--            </form>--%>
-            <form method="get" action="posts">
-                <input type="submit" value="search" name="action" style="display: inline; float: right" >
-                <input type="text" name="title"
-                       style="display: inline; float: right; width: 30%" placeholder="Nhập tiêu đề bạn muốn tìm">
-            </form>
+            <div style="    display: inline-block;
+    float: right;">
+                <form class="form-inline my-2 my-lg-0" method="get" action="posts">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"
+                           name="title"
+                    >
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="action"
+                    >Search
+                    </button>
+                </form>
+            </div>
         </div>
     </nav>
 
@@ -86,7 +103,7 @@
     <div class="row">
 
         <!--    main  -->
-        <div class="col-9">
+        <div class="col-12">
             <div class="block-container border">
                 <div class="block-header">
                     <a href="/#dai-sanh.1">Đại sảnh</a>
@@ -146,38 +163,6 @@
 
         <!--    global chat-->
 
-        <div class="col-3 border global-chat">
-            <div class="header-chat border-bot">
-                <h5>Global Chat</h5>
-            </div>
-            <div class="main_section">
-                <div class="chat_container">
-                    <!--chat_sidebar-->
-
-
-                    <div class="col-sm-12 message_section ">
-                        <div class="row">
-
-                            <!--new_message_head-->
-
-                            <div class="chat_area chat" id="chat" name="chat">
-                                <div class="chat-sm"></div>
-                            </div>
-                            <!--chat_area-->
-
-                        </div>
-                    </div> <!--message_section-->
-
-                </div>
-
-                <div class="message_write">
-                    <textarea class="form-control" id="msg" name="msg" placeholder="type a message"></textarea>
-                    <div class="chat_bottom">
-                        <button onclick="sendMsg()" class="pull-right btn btn-success">Send</button>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 </div>
