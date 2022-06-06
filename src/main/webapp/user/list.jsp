@@ -22,7 +22,7 @@
           integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/style.css"  type="text/css">
 
 </head>
 <body id="navbar-toggle-button">
@@ -31,12 +31,27 @@
     <nav class="logo">
 
         <!--        đăng nhập, đăng kí-->
-        <c:if test="${name==null}">
-            <a href="/logins">Đăng nhập</a>
-            <a href="/registers">Đăng kí</a>
+        <c:if test="${username==null}">
+            <div style="    margin-right: 2%;
+    float: right;
+    display: inline-block;">
+                <form action="/logins">
+                    <button class="btn btn-light">Đăng Nhập</button>
+                </form>
+            </div>
+            <div style="    margin-right: 10px;
+    display: inline-block;
+    float: right;">
+                <form action="/registers">
+                    <button class="btn btn-primary">Đăng Ký</button>
+                </form>
+            </div>
         </c:if>
-        <c:if test="${name != null}">
-            <a href="/logins?action=logout">Đăng xuất</a>
+        <c:if test="${username != null}">
+            <div style="    margin-right: 2%;float: right; display: inline-block;">
+
+                <a  href="/logins?action=logout"><button class="btn btn-success">Đăng Xuất</button></a>
+            </div>
         </c:if>
     </nav>
 

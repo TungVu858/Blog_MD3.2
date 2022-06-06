@@ -13,16 +13,17 @@
     <!-- Latest compiled and minified CSS -->
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="assets/css/main.css"/>
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/assets/css/main.css"/>
     <noscript>
         <link rel="stylesheet" href="assets/css/noscript.css"/>
     </noscript>
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
           integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
 
 </head>
 <body id="navbar-toggle-button">
@@ -32,11 +33,26 @@
 
         <!--        đăng nhập, đăng kí-->
         <c:if test="${username==null}">
-            <a href="/logins">Đăng nhập</a>
-            <a href="/registers">Đăng kí</a>
+            <div style="    margin-right: 2%;
+    float: right;
+    display: inline-block;">
+                <form action="/logins">
+                    <button class="btn btn-light">Đăng Nhập</button>
+                </form>
+            </div>
+            <div style="    margin-right: 10px;
+    display: inline-block;
+    float: right;">
+                <form action="/registers">
+                    <button class="btn btn-primary">Đăng Ký</button>
+                </form>
+            </div>
         </c:if>
         <c:if test="${username != null}">
-            <a href="/logins?action=logout">Đăng xuất</a>
+            <div style="    margin-right: 2%;float: right; display: inline-block;">
+
+                <a  href="/logins?action=logout"><button class="btn btn-success">Đăng Xuất</button></a>
+            </div>
         </c:if>
     </nav>
 
@@ -49,9 +65,9 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/logins?action=view">${name}</a>
-                    </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logins?action=view">${name}</a>
+                </li>
                 <c:if test="${username != null}">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="/posts" id="navbarDropdown" role="button"
@@ -60,12 +76,12 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="/posts?action=create">Tạo mới bài viết</a>
-                            <a class="dropdown-item" href="/posts?action=search$&id=${p.user.id}">Các bài viết của
+                            <a class="dropdown-item" href="/posts?action=search&userId=${userId}">Các bài viết của
                                 mình</a>
                         </div>
                     </li>
                 </c:if>
-                <c:if test="${username != null && roleId==1}">
+                <c:if test="${username!=null && roleId==1}">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button"
                            data-toggle="dropdown" aria-expanded="false">
@@ -79,8 +95,21 @@
                 </c:if>
             </ul>
 
+            <%--            thẻ search--%>
+            <div style="    display: inline-block;float: right;">
+                <form class="form-inline my-2 my-lg-0" method="get" action="posts">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"
+                           name="title"
+                    >
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="action"
+                    >Search
+                    </button>
+                </form>
+            </div>
         </div>
     </nav>
+
+
 </div>
 <div class="container">
     <div class="row">

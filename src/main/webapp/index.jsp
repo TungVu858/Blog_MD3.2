@@ -9,7 +9,9 @@
           integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+
+
+    <link rel="stylesheet" href="/assets/css/style.css"  type="text/css">
     <link rel="shortcut icon" type="image/png" href="/favicon.png">
 
 </head>
@@ -81,8 +83,9 @@
                     </li>
                 </c:if>
             </ul>
-            <div style="    display: inline-block;
-    float: right;">
+
+<%--            thẻ search--%>
+            <div style="    display: inline-block;float: right;">
                 <form class="form-inline my-2 my-lg-0" method="get" action="posts">
                     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"
                            name="title"
@@ -95,6 +98,7 @@
         </div>
     </nav>
 
+<%--    main--%>
 </div>
 
 <div class="container">

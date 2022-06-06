@@ -30,12 +30,27 @@
 <div class="nav-fixed">
     <nav class="logo">
         <!--        đăng nhập, đăng kí-->
-        <c:if test="${userId==null}">
-            <a href="/logins">Đăng nhập</a>
-            <a href="/registers">Đăng kí</a>
+        <c:if test="${username==null}">
+            <div style="    margin-right: 2%;
+    float: right;
+    display: inline-block;">
+                <form action="/logins">
+                    <button class="btn btn-light">Đăng Nhập</button>
+                </form>
+            </div>
+            <div style="    margin-right: 10px;
+    display: inline-block;
+    float: right;">
+                <form action="/registers">
+                    <button class="btn btn-primary">Đăng Ký</button>
+                </form>
+            </div>
         </c:if>
-        <c:if test="${userId != null}">
-            <a href="/logins?action=logout">Đăng xuất</a>
+        <c:if test="${username != null}">
+            <div style="    margin-right: 2%;float: right; display: inline-block;">
+
+                <a  href="/logins?action=logout"><button class="btn btn-success">Đăng Xuất</button></a>
+            </div>
         </c:if>
     </nav>
 
