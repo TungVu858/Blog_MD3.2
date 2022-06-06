@@ -2,7 +2,7 @@ package com.example.blog.controller;
 
 import com.example.blog.model.Post;
 import com.example.blog.model.User;
-import com.example.blog.service.PostsService;
+import com.example.blog.service.impl.PostsServiceImpl;
 import com.example.blog.service.impl.UserServiceImpl;
 
 import javax.servlet.*;
@@ -10,17 +10,17 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "PostServlet", urlPatterns = "/posts")
 public class PostServlet extends HttpServlet {
-   PostsService postsService = new PostsService();
+   PostsServiceImpl postsServiceImpl = new PostsServiceImpl();
    UserServiceImpl userService = new UserServiceImpl();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("utf-8");
         String action = request.getParameter("action");
         if(action == null){
             action ="";
@@ -43,7 +43,7 @@ public class PostServlet extends HttpServlet {
                     throw new RuntimeException(e);
                 }
                 break;
-            case " search":
+            case "searchTime":
                 search(request,response);
                 break;
             default :
@@ -52,23 +52,22 @@ public class PostServlet extends HttpServlet {
         }
     }
 
-    private void search(HttpServletRequest request, HttpServletResponse response) {
-        String uId= request.getParameter("userId");
-        String title = request.getParameter("title");
-        List<Post> postList = postsService.findAll();
-        if(title!=null){
-            postList = postsService.findByName(title);
+    private void search(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("blog/post.jsp");
+        if (LoginServlet.currentId==0){
+            List<Post> posts = postsServiceImpl.findTop6PostTimeOff();
+            request.setAttribute("posts", posts);
+            requestDispatcher.forward(request, response);
+        }else {
+            List<Post> posts = postsServiceImpl.findTop6PostTime();
+            request.setAttribute("post", posts);
+            requestDispatcher.forward(request, response);
         }
-        if(uId!=null){
-            postList = postsService.findByUserId(Integer.parseInt(uId));
-        }
-        request.setAttribute("posts",postList);
-
     }
 
     private void showEdit(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        Post post = postsService.findById(id);
+        Post post = postsServiceImpl.findById(id);
         request.setAttribute("post",post);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("blog/edit.jsp");
         requestDispatcher.forward(request,response);
@@ -91,29 +90,44 @@ public class PostServlet extends HttpServlet {
         String content =request.getParameter("content");
         LocalDateTime localDate = LocalDateTime.now();
         int status = Integer.parseInt(request.getParameter("status"));
-        postsService.add(new Post(user,title,description,content,localDate,status));
-        response.sendRedirect("index.jsp");
+        postsServiceImpl.add(new Post(user,title,description,content,localDate,status));
+        response.sendRedirect("/");
     }
 
     private void showPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("blog/post.jsp");
-        List<Post> posts = postsService.findAll();
-        String title = request.getParameter("title");
-        if(title!=null){
-            posts = postsService.findByName(title);
+        if (LoginServlet.currentId!=0) {
+            List<Post> posts = postsServiceImpl.findAll();
+            String title = request.getParameter("title");
+            if (title != null) {
+                posts = postsServiceImpl.findByName(title);
+            }
+            String uId = request.getParameter("userId");
+            if (uId != null) {
+                posts = postsServiceImpl.findByUserId(Integer.parseInt(uId));
+            }
+            request.setAttribute("post", posts);
+            requestDispatcher.forward(request, response);
+        }else {
+            List<Post> posts = postsServiceImpl.findAllOff();
+            String title = request.getParameter("title");
+            if (title != null) {
+                posts = postsServiceImpl.findByName(title);
+            }
+            String uId = request.getParameter("userId");
+            if (uId != null) {
+                posts = postsServiceImpl.findByUserId(Integer.parseInt(uId));
+            }
+            request.setAttribute("posts", posts);
+            requestDispatcher.forward(request, response);
         }
-        String uId= request.getParameter("userId");
-
-        if(uId!=null){
-            posts = postsService.findByUserId(Integer.parseInt(uId));
-        }
-        request.setAttribute("post",posts);
-        requestDispatcher.forward(request,response);
 
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("utf-8");
         String action = request.getParameter("action");
         if(action == null){
             action ="";
@@ -142,7 +156,6 @@ public class PostServlet extends HttpServlet {
                 break;
 
         }
-
     }
 
     private void edit(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
@@ -153,13 +166,13 @@ public class PostServlet extends HttpServlet {
         String content =request.getParameter("content");
         LocalDateTime localDate = LocalDateTime.now();
         int status = Integer.parseInt(request.getParameter("status"));
-        postsService.update(new Post(id,user,title,description,content,localDate,status));
+        postsServiceImpl.update(new Post(id,user,title,description,content,localDate,status));
         response.sendRedirect("/posts");
     }
 
     private void delete(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        postsService.delete(id);
+        postsServiceImpl.delete(id);
         response.sendRedirect("/posts");
 
     }

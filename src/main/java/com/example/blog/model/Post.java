@@ -1,11 +1,10 @@
 package com.example.blog.model;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Post {
     private int id;
-    private User userId;
+    private User user;
     private String title;
     private String description;
     private String content;
@@ -15,8 +14,8 @@ public class Post {
     public Post() {
     }
 
-    public Post(User userId, String title, String description, String content, LocalDateTime postDate, int status) {
-        this.userId = userId;
+    public Post(User user, String title, String description, String content, LocalDateTime postDate, int status) {
+        this.user = user;
         this.title = title;
         this.description = description;
         this.content = content;
@@ -24,9 +23,9 @@ public class Post {
         this.status = status;
     }
 
-    public Post(int id, User userId, String title, String description, String content, LocalDateTime postDate, int status) {
+    public Post(int id, User user, String title, String description, String content, LocalDateTime postDate, int status) {
         this.id = id;
-        this.userId = userId;
+        this.user = user;
         this.title = title;
         this.description = description;
         this.content = content;
@@ -42,12 +41,12 @@ public class Post {
         this.id = id;
     }
 
-    public User getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(User userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getTitle() {

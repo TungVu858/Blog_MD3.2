@@ -13,6 +13,7 @@ import static java.sql.DriverManager.getConnection;
 
 public class UserServiceImpl implements UserService {
     RoleServiceImpl roleService = new RoleServiceImpl();
+
     public UserServiceImpl() {
     }
 
@@ -28,16 +29,17 @@ public class UserServiceImpl implements UserService {
         }
         return connection;
     }
+
     @Override
     public void add(User user) throws SQLException {
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("insert into user(username,password,name,email,roleId,status ) values (?,?,?,?,?,? )");) {
             preparedStatement.setString(1, user.getUsername());
             preparedStatement.setString(2, user.getPassword());
-            preparedStatement.setString(3,user.getName());
-            preparedStatement.setString(4,user.getEmail());
-            preparedStatement.setInt(5,user.getRoleId().getId());
-            preparedStatement.setInt(6,user.getStatus());
+            preparedStatement.setString(3, user.getName());
+            preparedStatement.setString(4, user.getEmail());
+            preparedStatement.setInt(5, user.getRoleId().getId());
+            preparedStatement.setInt(6, user.getStatus());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
 
@@ -61,7 +63,7 @@ public class UserServiceImpl implements UserService {
                 int roleId = rs.getInt("roleId");
                 Role role = roleService.findById(roleId);
                 int status = rs.getInt("status");
-                user = new User(id, username, password,name,email,role,status);
+                user = new User(id, username, password, name, email, role, status);
             }
         } catch (SQLException e) {
         }
@@ -72,7 +74,7 @@ public class UserServiceImpl implements UserService {
     public List<User> findAll() {
         List<User> users = new ArrayList<>();
         try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("select * from user where (roleId=2)" );) {
+             PreparedStatement preparedStatement = connection.prepareStatement("select * from user where (roleId=2)");) {
             System.out.println(preparedStatement);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
@@ -84,7 +86,7 @@ public class UserServiceImpl implements UserService {
                 int roleId = rs.getInt("roleId");
                 Role role = roleService.findById(roleId);
                 int status = rs.getInt("status");
-                users.add(new User(id, username, password,name,email,role,status));
+                users.add(new User(id, username, password, name, email, role, status));
             }
         } catch (SQLException e) {
 
@@ -98,7 +100,7 @@ public class UserServiceImpl implements UserService {
         List<User> users = new ArrayList<>();
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("select * from user where (roleId=2) and name like ? ");) {
-            preparedStatement.setString(1, '%'+name+'%');
+            preparedStatement.setString(1, '%' + name + '%');
             System.out.println(preparedStatement);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
@@ -110,7 +112,7 @@ public class UserServiceImpl implements UserService {
                 int roleId = rs.getInt("roleId");
                 Role role = roleService.findById(roleId);
                 int status = rs.getInt("status");
-                users.add(new User(id,username,password,nameFind,email,role,status));
+                users.add(new User(id, username, password, nameFind, email, role, status));
             }
         } catch (SQLException e) {
 
@@ -121,8 +123,8 @@ public class UserServiceImpl implements UserService {
     public List<User> findByUserName(String name) {
         List<User> user = new ArrayList<>();
         try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("select * from user where username = ?; ");) {
-            preparedStatement.setString(1, name);
+             PreparedStatement preparedStatement = connection.prepareStatement("select * from user where username like ?; ");) {
+            preparedStatement.setString(1, "%" + name + "%");
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("id");
@@ -133,14 +135,14 @@ public class UserServiceImpl implements UserService {
                 int roleId = rs.getInt("roleId");
                 Role role = roleService.findById(roleId);
                 int status = rs.getInt("status");
-                user.add(new User(id,usernameFind,password,nameFind,email,role,status));
-                return user;
+                user.add(new User(id, usernameFind, password, nameFind, email, role, status));
             }
         } catch (SQLException e) {
 
         }
-        return null;
+        return user;
     }
+
     @Override
     public boolean delete(int id) throws SQLException {
         boolean rowDeleted;
@@ -150,7 +152,8 @@ public class UserServiceImpl implements UserService {
         }
         return rowDeleted;
     }
-    public boolean delete(User user) throws SQLException{
+
+    public boolean delete(User user) throws SQLException {
         boolean rowDeleted;
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("update user set status=2 where id=?;");) {
@@ -159,12 +162,13 @@ public class UserServiceImpl implements UserService {
         }
         return rowDeleted;
     }
+
     @Override
     public boolean update(User user) throws SQLException {
         boolean rowUpdated;
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("update user set password=?,name=?,email =? where id=?;");) {
-            preparedStatement.setString(1,user.getPassword());
+            preparedStatement.setString(1, user.getPassword());
             preparedStatement.setString(2, user.getName());
             preparedStatement.setString(3, user.getEmail());
             preparedStatement.setInt(4, user.getId());
@@ -183,12 +187,13 @@ public class UserServiceImpl implements UserService {
         }
         return rowUnlock;
     }
-    public User findByUserNamePassword(String username,String password) {
+
+    public User findByUserNamePassword(String username, String password) {
         User user = null;
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("select * from user where username like ? and password like ?");) {
             preparedStatement.setString(1, username);
-            preparedStatement.setString(2,password);
+            preparedStatement.setString(2, password);
             System.out.println(preparedStatement);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
@@ -200,7 +205,7 @@ public class UserServiceImpl implements UserService {
                 int roleId = rs.getInt("roleId");
                 Role role = roleService.findById(roleId);
                 int status = rs.getInt("status");
-                user = new User(id, usr, pw,name,email,role,status);
+                user = new User(id, usr, pw, name, email, role, status);
             }
         } catch (SQLException e) {
         }

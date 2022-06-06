@@ -55,7 +55,7 @@ public class UserServlet extends HttpServlet {
     private void showSearchForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/list.jsp");
         String name = request.getParameter("name");
-        List<User> users = userService.findByName(name);
+        List<User> users = userService.findByUserName(name);
         if(users.size()>0){
             request.setAttribute("users", users);
             requestDispatcher.forward(request, response);
