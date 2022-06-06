@@ -100,7 +100,7 @@
                     <option value="0"> Public</option>
                     <option value="1"> Private</option>
                 </select>
-                <input type="submit"/>
+                <button type="button" class="btn btn-success">Gửi</button>
             </form>
         </div>
 <%--    </div>--%>

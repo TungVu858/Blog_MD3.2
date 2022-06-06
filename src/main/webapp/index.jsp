@@ -19,8 +19,8 @@
 
         <!--        đăng nhập, đăng kí-->
         <c:if test="${username==null}">
-            <a href="/logins">Đăng nhập</a>
-            <a href="/registers">Đăng kí</a>
+            <button><a href="/logins">Đăng nhập</a></button>
+            <button><a href="/registers">Đăng kí</a></button>
         </c:if>
         <c:if test="${username != null}">
             <a href="/logins?action=logout">Đăng xuất</a>
