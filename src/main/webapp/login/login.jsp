@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta charset="utf-8"/>
-    <title>Title</title>
+    <title>Đăng nhập</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -28,7 +28,7 @@
                 <span style="color: red" class="text-center" >${mess}</span>
                 <span style="color: red" class="text-center" >${mess1}</span>
                 <input type="submit" value="Đăng nhập" class="btn-primary btn-block btn">
-                <a class="btn-primary btn-block btn" href="registers">Đăng ký</a>
+                <a href="/index.jsp" class="btn-success btn btn-block">Trang chủ</a>
             </form>
         </div>
     </div>
