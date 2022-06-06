@@ -6,6 +6,7 @@ import com.example.blog.service.RoleService;
 import java.sql.*;
 import java.util.List;
 
+
 public class RoleServiceImpl implements RoleService {
     protected Connection getConnection() {
         Connection connection = null;

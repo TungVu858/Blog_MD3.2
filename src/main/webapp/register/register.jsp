@@ -31,7 +31,7 @@
                     <input type="text" name="name" id="name" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label for="name">Email</label>
+                    <label for="email">Email</label>
                     <input type="email" name="email" id="email" class="form-control">
                 </div>
                 <input type="hidden" name="roleId" value="2">

@@ -1,11 +1,11 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
-  User: Windows 10
-  Date: 6/2/2022
-  Time: 3:41 PM
+  User: Admin
+  Date: 3/6/2022
+  Time: 5:16 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -29,6 +29,7 @@
 <body>
 <div class="nav-fixed">
     <nav class="logo">
+
         <!--        đăng nhập, đăng kí-->
         <c:if test="${name==null}">
             <a href="/logins">Đăng nhập</a>
@@ -79,29 +80,62 @@
         </div>
     </nav>
         <div class="row justify-content-around">
-            <form method="post" class="col-md-6 bg-light p-3 my-3" id="myForm">
-                <h1 class="text-center text-uppercase h3">Sửa bài viết</h1>
+            <form method="post" class="col-md-6 bg-light p-3 my-3" id="myForm" action="posts?action=edit&id=${post.id}">
+                <c:if test="${username != null && (roleId==1 || post.user.id==userId)}">
+                    <h1 class="text-center text-uppercase h3">Sửa bài viết</h1>
+                </c:if>
                 <input type="hidden" name="action" value="edit">
                 <input type="hidden" name="id">
                 <input type="hidden" name="userId" value="${roleId}">
-                <span class="form-control" type="text" name="name">${name}</span><br>
+                <span class="form-control" type="text" name="name">${post.user.name}</span><br>
                 <div class="form-group">
-                    <label for="title">Tiêu đề</label>
+                    <c:if test="${username == null}">
+                        <label for="title">Tiêu đề</label>
+                        <span type="text" name="title" id="title" class="form-control">${post.title}</span>
+                    </c:if>
+                     <c:if test="${username != null && post.user.id!=userId &&roleId!=1}">
+                        <label for="title">Tiêu đề</label>
+                         <span type="text" name="title" id="title" class="form-control">${post.title}</span>
+                    </c:if>
+                     <c:if test="${username != null && (roleId==1 || post.user.id==userId)}">
+                        <label for="title">Tiêu đề</label>
                     <input type="text" name="title" id="title" class="form-control" value="${post.title}">
+                        </c:if>
                 </div>
                 <div class="form-group">
-                    <label for="description">Description</label>
-                    <input type="text" name="description" id="description" class="form-control" value="${post.description}">
+                    <c:if test="${username == null}">
+                    <label for="description">Mô tả bài viết</label>
+                        <span type="text" name="description" id="description" class="form-control" >${post.description}</span>
+                    </c:if>
+                    <c:if test="${username != null && post.user.id !=userId &&roleId!=1}">
+                        <label for="description">Mô tả bài viết</label>
+                        <span type="text" name="description" id="description" class="form-control" >${post.description}</span>
+                    </c:if>
+                    <c:if test="${username != null && (roleId==1 || post.user.id==userId)}">
+                        <label for="description">Mô tả bài viết</label>
+                        <input type="text" name="description" id="description" class="form-control" value="${post.description}">
+                    </c:if>
                 </div>
-                <label for="content">Nội dung</label>
-                <div id="content">${post.content}</div>
-                <textarea name="content" style="display:none;"></textarea>
-                <select name="status"><br>
-                    <option value="0"> Công khai</option>
-                    <option value="1"> Riêng tư</option>
-                </select>
-                <c:if test="${userId != null && (roleId==1 || post.user.id==userId)}">
-                    <input type="submit"/>
+                <c:if test="${username == null}">
+                    <label for="content">Nội dung</label>
+                    <span class="form-control" type="text" name="content" >${post.content}</span>
+                </c:if>
+                <c:if test="${username != null && post.user.id !=userId &&roleId!=1}">
+                    <label for="content">Nội dung</label>
+                    <span class="form-control" type="text" name="content" >${post.content}</span>
+                </c:if>
+                <c:if test="${username != null && (roleId==1 || post.user.id==userId)}">
+                    <label for="content">Nội dung</label>
+                    <div id="content">${post.content}</div>
+                    <textarea name="content" style="display:none;"></textarea>
+                </c:if>
+                <c:if test="${username != null && (roleId==1 || post.user.id==userId)}">
+                    <select name="status"><br>
+                        <option value="0"> Công khai</option>
+                        <option value="1"> Riêng tư</option>
+                    </select>
+                    <input type="submit" class="btn btn-primary" value="Sửa"/>
+                    <a href="/posts?action=delete&id=${p.id}" class="btn btn-danger">Xóa</a></h1>
                 </c:if>
             </form>
         </div>
@@ -110,7 +144,6 @@
 <script>
     $(document).ready(function () {
         $('#content').summernote();
-
         // copy the html-text from summernote to the hidden textarea
         // and let the browser submit it
         $('#myForm').submit(function () {

@@ -84,6 +84,8 @@ public class LoginServlet extends HttpServlet {
         int status = Integer.parseInt(request.getParameter("status"));
         userService.update(new User(currentId,username,password,name,email,role,status));
         session.setAttribute("name", name);
+        session.setAttribute("email",email);
+        session.setAttribute("password",password);
         response.sendRedirect("/");
     }
 
@@ -91,7 +93,8 @@ public class LoginServlet extends HttpServlet {
         if (session.getAttribute("name")!=null){
             session.invalidate();
         }
-        response.sendRedirect("/");
+            currentId = 0;
+            response.sendRedirect("/");
     }
 
     private void login(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException, ServletException {
@@ -99,15 +102,22 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("password");
         User user = userService.findByUserNamePassword(username , password);
         if(user == null){
-            request.setAttribute("mess", "Nhập sai tài khoản hoặc mật khẩu");
-            request.getRequestDispatcher("login/login.jsp").forward(request,response);
+                request.setAttribute("mess", "Nhập sai tài khoản hoặc mật khẩu");
+                request.getRequestDispatcher("login/login.jsp").forward(request,response);
         } else {
-            session.setAttribute("email",user.getEmail());
-            session.setAttribute("name" , user.getName());
-            session.setAttribute("roleId",user.getRoleId().getId());
-            session.setAttribute("userId", user.getId());
-            currentId = user.getId();
-            response.sendRedirect("/");
+            if (user.getStatus()==2){
+                request.setAttribute("mess1", "Tài khoản của bạn đã bị khoá");
+                request.getRequestDispatcher("login/login.jsp").forward(request,response);
+            }
+            else {
+                session.setAttribute("email", user.getEmail());
+                session.setAttribute("name", user.getName());
+                session.setAttribute("username",user.getUsername());
+                session.setAttribute("roleId", user.getRoleId().getId());
+                session.setAttribute("userId", user.getId());
+                currentId = user.getId();
+                response.sendRedirect("/");
+            }
         }
     }
 }
