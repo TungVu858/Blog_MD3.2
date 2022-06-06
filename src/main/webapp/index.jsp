@@ -35,7 +35,9 @@
             </div>
         </c:if>
         <c:if test="${username != null}">
-            <div>
+            <div style="    margin-right: 2%;
+    float: right;
+    display: inline-block;">
                 <form action="/logins?action=logout">
                     <button class="btn btn-success">Đăng Xuất</button>
                 </form>
