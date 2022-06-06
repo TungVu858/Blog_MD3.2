@@ -40,7 +40,7 @@
                 <span style="color: red" class="text-center" >${mess}</span>
                 <br>
                 <button class="btn-primary btn-block btn">Đăng kí</button>
-                <a href="/index.jsp" class="btn-success btn btn-block">Trang chủ</a>
+                <a href="/" class="btn-success btn btn-block">Trang chủ</a>
             </form>
            
         </div>

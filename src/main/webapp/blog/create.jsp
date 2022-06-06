@@ -101,7 +101,7 @@
                     <option value="0"> Công khai</option>
                     <option value="1"> Riêng tư</option>
                 </select>
-                <button type="button" class="btn btn-success">Gửi</button>
+                <button class="btn btn-success">Gửi</button>
             </form>
         </div>
 <%--    </div>--%>

@@ -22,25 +22,19 @@
             <div style="    margin-right: 2%;
     float: right;
     display: inline-block;">
-                <form action="/logins">
-                    <button class="btn btn-light">Đăng Nhập</button>
-                </form>
+                <a class="btn btn-light" href="/logins">Đăng Nhập</a>
             </div>
             <div style="    margin-right: 10px;
     display: inline-block;
     float: right;">
-                <form action="/registers">
-                    <button class="btn btn-primary">Đăng Ký</button>
-                </form>
+                    <a class="btn btn-primary" href="/registers">Đăng Ký</a>
             </div>
         </c:if>
         <c:if test="${username != null}">
             <div style="    margin-right: 2%;
     float: right;
     display: inline-block;">
-                <form action="/logins?action=logout">
-                    <button class="btn btn-success">Đăng Xuất</button>
-                </form>
+                    <a class="btn btn-success" href="/logins?action=logout">Đăng Xuất</a>
             </div>
         </c:if>
     </nav>
