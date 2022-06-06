@@ -84,21 +84,22 @@
                 <h1 class="text-center text-uppercase h3">Tạo bài viết mới</h1>
                 <input type="hidden" name="action" value="create">
                 <input type="hidden" name="id">
-                <input type="hidden" name="userId" value="${roleId}">
+                <input type="hidden" name="userId" value="${userId}">
                 <span class="form-control" type="text" name="name">${name}</span><br>
                 <div class="form-group">
                     <label for="title">Tiêu đề</label>
                     <input type="text" name="title" id="title" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label for="description">Description</label>
+                    <label for="description">Mô tả</label>
                     <input type="text" name="description" id="description" class="form-control">
                 </div>
+                <label for="content">Nội dung</label>
                 <div id="content"></div>
                 <textarea name="content" style="display:none;"></textarea>
                 <select name="status"><br>
-                    <option value="0"> Public</option>
-                    <option value="1"> Private</option>
+                    <option value="0"> Công khai</option>
+                    <option value="1"> Riêng tư</option>
                 </select>
                 <input type="submit"/>
             </form>

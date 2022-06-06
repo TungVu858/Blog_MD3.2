@@ -120,11 +120,11 @@ public class UserServiceImpl implements UserService {
         return users;
     }
 
-    public List<User> findByUserName(String name) {
+    public List<User> findByUserName(String username) {
         List<User> user = new ArrayList<>();
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("select * from user where username like ?; ");) {
-            preparedStatement.setString(1, "%" + name + "%");
+            preparedStatement.setString(1,  "%" + username+"%" );
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("id");
@@ -142,6 +142,30 @@ public class UserServiceImpl implements UserService {
         }
         return user;
     }
+    public List<User> findByIsUserName(String username) {
+        List<User> user = new ArrayList<>();
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("select * from user where username = ?; ");) {
+            preparedStatement.setString(1,   username );
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String usernameFind = rs.getString("username");
+                String password = rs.getString("password");
+                String nameFind = rs.getString("name");
+                String email = rs.getString("email");
+                int roleId = rs.getInt("roleId");
+                Role role = roleService.findById(roleId);
+                int status = rs.getInt("status");
+                user.add(new User(id, usernameFind, password, nameFind, email, role, status));
+                return user;
+            }
+        } catch (SQLException e) {
+
+        }
+        return null;
+    }
+
 
     @Override
     public boolean delete(int id) throws SQLException {

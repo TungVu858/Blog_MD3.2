@@ -104,7 +104,7 @@
                     </tr>
                     <c:forEach items="${post}" var="p">
                         <tr>
-                            <td>${p.user.username}</td>
+                            <td>${p.user.name}</td>
                             <td><a href="/post-details?id=${p.id}">${p.title} </a></td>
                             <td>${p.description}</td>
                             <td>${p.postDate}</td>

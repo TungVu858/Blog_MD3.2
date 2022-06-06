@@ -60,9 +60,9 @@ public class RegisterServlet extends HttpServlet {
         int roleId = Integer.parseInt(request.getParameter("roleId"));
         Role role = roleService.findById(roleId);
         int status = Integer.parseInt(request.getParameter("status"));
-        if (userService.findByUserName(username) == null) {
+        if (userService.findByIsUserName(username) == null) {
             userService.add(new User(username, password, name, email, role, status));
-            response.sendRedirect("/registers");
+            response.sendRedirect("/logins");
         } else {
             request.setAttribute("mess", "Tài khoản đã tồn tại");
             request.getRequestDispatcher("register/register.jsp").forward(request,response);

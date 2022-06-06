@@ -34,7 +34,7 @@ public class PostsServiceImpl implements com.example.blog.service.PostService {
         try (Connection connection = getConnection();
 
              PreparedStatement preparedStatement = connection.prepareStatement
-                     ("insert into posts (userId,title,description,content,date,status) value (?,?,?,?,?,?)");) {
+                     ("insert into posts (userId,title,description,content,postDate,status) value (?,?,?,?,?,?)");) {
             preparedStatement.setInt(1, post.getUser().getId());
             preparedStatement.setString(2, post.getTitle());
             preparedStatement.setString(3, post.getDescription());
@@ -45,6 +45,7 @@ public class PostsServiceImpl implements com.example.blog.service.PostService {
             System.out.println(preparedStatement);
 
         } catch (SQLException e) {
+            System.out.println(e);
         }
     }
 
