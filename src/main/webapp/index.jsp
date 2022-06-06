@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Blog v2.2</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
           integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -19,11 +19,27 @@
 
         <!--        đăng nhập, đăng kí-->
         <c:if test="${username==null}">
-            <button><a href="/logins">Đăng nhập</a></button>
-            <button><a href="/registers">Đăng kí</a></button>
+            <div style="    margin-right: 2%;
+    float: right;
+    display: inline-block;">
+                <form action="/logins">
+                    <button class="btn btn-light">Đăng Nhập</button>
+                </form>
+            </div>
+            <div style="    margin-right: 10px;
+    display: inline-block;
+    float: right;">
+                <form action="/registers">
+                    <button class="btn btn-primary">Đăng Ký</button>
+                </form>
+            </div>
         </c:if>
         <c:if test="${username != null}">
-            <a href="/logins?action=logout">Đăng xuất</a>
+            <div>
+                <form action="/logins?action=logout">
+                    <button class="btn btn-success">Đăng Xuất</button>
+                </form>
+            </div>
         </c:if>
     </nav>
 
@@ -70,9 +86,9 @@
                 <form class="form-inline my-2 my-lg-0" method="get" action="posts">
                     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"
                            name="title"
-                           >
+                    >
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="action"
-                           >Search
+                    >Search
                     </button>
                 </form>
             </div>
