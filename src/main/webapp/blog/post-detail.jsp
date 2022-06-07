@@ -78,13 +78,14 @@
                 <span class="form-control" type="text" name="content">${post.content}</span>
             </c:if>
             <c:if test="${username != null && post.user.id !=userId &&roleId!=1}">
+
                 <label for="content">Nội dung</label>
                 <span class="form-control" type="text" name="content">${post.content}</span>
             </c:if>
             <c:if test="${username != null && (roleId==1 || post.user.id==userId)}">
                 <label for="content">Nội dung</label>
                 <div id="content">${post.content}</div>
-                <textarea name="content" style="display:none;"></textarea>
+                <textarea name="content" style="    display:none;"></textarea>
             </c:if>
             <c:if test="${username != null && (roleId==1 || post.user.id==userId)}">
                 <select name="status"><br>

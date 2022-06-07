@@ -22,29 +22,27 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.js"></script>
 </head>
 <body>
-<div class="row justify-content-around">
-    <form class="col-md-6 bg-light p-3 my-3" id="myForm">
-            <div class="form-group">
-                <label for="postId">Tiêu đề</label>
-                <span name="postId" id="postId" class="form-control">${title}</span>
-            </div>
-        <c:forEach items="${comment}" var="c">
-                <label for="userId">Người gửi</label>
-                <span name="userId" id="userId" class="form-control">${c.userId.name}: ${c.content}</span>
-<%--                <span class="form-control" name="content" id="content">${c.content}</span>--%>
-        </c:forEach>
-    </form>
+<div class="container" style="overflow: auto; margin-top: 0">
+    <div class="" style="margin: 10px">
+        <a href="/" class="btn btn-primary">Trang chủ</a>
+    </div>
+    <div class="row mt-3">
+        <div class="col-12">
+            <form class="" id="myForm">
+                <div class="form-group">
+                    <label for="postId">Tiêu đề</label>
+                    <span name="postId" id="postId" class="form-control">${title}</span>
+                </div>
+                <c:forEach items="${comment}" var="c">
+                    <label for="userId">Người gửi</label>
+
+                    <span name="userId" id="userId" class="form-control">${c.userId.name}: ${c.content}</span>
+                    <%--                <span class="form-control" name="content" id="content">${c.content}</span>--%>
+                </c:forEach>
+            </form>
+        </div>
+    </div>
 </div>
 </body>
-<%--<script>--%>
-<%--    $(document).ready(function () {--%>
-<%--        $('#content').summernote();--%>
 
-<%--        // copy the html-text from summernote to the hidden textarea--%>
-<%--        // and let the browser submit it--%>
-<%--        $('#myForm').submit(function () {--%>
-<%--            $('textarea[name=content]').val($('#content').summernote('code'));--%>
-<%--        });--%>
-<%--    });--%>
-<%--</script>--%>
 </html>
