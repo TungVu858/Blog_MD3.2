@@ -30,27 +30,12 @@
 <div class="nav-fixed">
     <nav class="logo">
         <!--        đăng nhập, đăng kí-->
-        <c:if test="${username==null}">
-            <div style="    margin-right: 2%;
-    float: right;
-    display: inline-block;">
-                <form action="/logins">
-                    <button class="btn btn-light">Đăng Nhập</button>
-                </form>
-            </div>
-            <div style="    margin-right: 10px;
-    display: inline-block;
-    float: right;">
-                <form action="/registers">
-                    <button class="btn btn-primary">Đăng Ký</button>
-                </form>
-            </div>
+        <c:if test="${name==null}">
+            <a href="/logins">Đăng nhập</a>
+            <a href="/registers">Đăng kí</a>
         </c:if>
-        <c:if test="${username != null}">
-            <div style="    margin-right: 2%;float: right; display: inline-block;">
-
-                <a  href="/logins?action=logout"><button class="btn btn-success">Đăng Xuất</button></a>
-            </div>
+        <c:if test="${name != null}">
+            <a href="/logins?action=logout">Đăng xuất</a>
         </c:if>
     </nav>
 
@@ -63,10 +48,10 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
+                <c:if test="${name != null}">
                     <li class="nav-item">
                         <a class="nav-link" href="/logins?action=view">${name}</a>
                     </li>
-                <c:if test="${userId != null}">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="/posts" id="navbarDropdown" role="button"
                            data-toggle="dropdown" aria-expanded="false">
@@ -78,7 +63,7 @@
                         </div>
                     </li>
                 </c:if>
-                <c:if test="${userId != null && roleId==1}">
+                <c:if test="${name != null && roleId==1}">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button"
                            data-toggle="dropdown" aria-expanded="false">
@@ -108,11 +93,12 @@
                     <label for="description">Description</label>
                     <input type="text" name="description" id="description" class="form-control" value="${post.description}">
                 </div>
+                <label for="content">Nội dung</label>
                 <div id="content">${post.content}</div>
                 <textarea name="content" style="display:none;"></textarea>
                 <select name="status"><br>
-                    <option value="0"> Public</option>
-                    <option value="1"> Private</option>
+                    <option value="0"> Công khai</option>
+                    <option value="1"> Riêng tư</option>
                 </select>
                 <c:if test="${userId != null && (roleId==1 || post.user.id==userId)}">
                     <input type="submit"/>

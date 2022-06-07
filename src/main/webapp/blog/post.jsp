@@ -13,111 +13,78 @@
     <!-- Latest compiled and minified CSS -->
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
-    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="/assets/css/main.css"/>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="assets/css/main.css"/>
     <noscript>
         <link rel="stylesheet" href="assets/css/noscript.css"/>
     </noscript>
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
           integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+    <link rel="stylesheet" href="assets/css/style.css">
 
 </head>
 <body id="navbar-toggle-button">
 <!--Nav-->
-<div class="nav-fixed">
-    <nav class="logo">
+<%--<div class="nav-fixed">--%>
+<%--    <nav class="logo">--%>
 
-        <!--        đăng nhập, đăng kí-->
-        <c:if test="${username==null}">
-            <div style="    margin-right: 2%;
-    float: right;
-    display: inline-block;">
-                <form action="/logins">
-                    <button class="btn btn-light">Đăng Nhập</button>
-                </form>
-            </div>
-            <div style="    margin-right: 10px;
-    display: inline-block;
-    float: right;">
-                <form action="/registers">
-                    <button class="btn btn-primary">Đăng Ký</button>
-                </form>
-            </div>
-        </c:if>
-        <c:if test="${username != null}">
-            <div style="    margin-right: 2%;float: right; display: inline-block;">
-
-                <a  href="/logins?action=logout"><button class="btn btn-success">Đăng Xuất</button></a>
-            </div>
-        </c:if>
-    </nav>
-
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="/">Trang chủ</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="/logins?action=view">${name}</a>
-                </li>
-                <c:if test="${username != null}">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="/posts" id="navbarDropdown" role="button"
-                           data-toggle="dropdown" aria-expanded="false">
-                            Bài đăng
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="/posts?action=create">Tạo mới bài viết</a>
-                            <a class="dropdown-item" href="/posts?action=search&userId=${userId}">Các bài viết của
-                                mình</a>
-                        </div>
-                    </li>
-                </c:if>
-                <c:if test="${username!=null && roleId==1}">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button"
-                           data-toggle="dropdown" aria-expanded="false">
-                            Quản lý
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
-                            <a class="dropdown-item" href="/users">Quản lý tài khoản</a>
-                            <a class="dropdown-item" href="/posts">Quản lý bài viết</a>
-                        </div>
-                    </li>
-                </c:if>
-            </ul>
-
-            <%--            thẻ search--%>
-            <div style="    display: inline-block;float: right;">
-                <form class="form-inline my-2 my-lg-0" method="get" action="posts">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"
-                           name="title"
-                    >
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="action"
-                    >Search
-                    </button>
-                </form>
-            </div>
-        </div>
-    </nav>
-
-
-</div>
-<div class="container">
+<%--        <!--        đăng nhập, đăng kí-->--%>
+<%--        <c:if test="${username==null}">--%>
+<%--            <a href="/logins">Đăng nhập</a>--%>
+<%--            <a href="/registers">Đăng kí</a>--%>
+<%--        </c:if>--%>
+<%--        <c:if test="${username != null}">--%>
+<%--            <a href="/logins?action=logout">Đăng xuất</a>--%>
+<%--        </c:if>--%>
+<%--    </nav>--%>
+<%--    <nav class="navbar navbar-expand-lg navbar-light bg-light">--%>
+<%--        <a class="navbar-brand" href="/">Trang chủ</a>--%>
+<%--        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"--%>
+<%--                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">--%>
+<%--            <span class="navbar-toggler-icon"></span>--%>
+<%--        </button>--%>
+<%--        <div class="collapse navbar-collapse" id="navbarSupportedContent">--%>
+<%--            <ul class="navbar-nav mr-auto">--%>
+<%--                    <li class="nav-item">--%>
+<%--                        <a class="nav-link" href="/logins?action=view">${name}</a>--%>
+<%--                    </li>--%>
+<%--                <c:if test="${username != null}">--%>
+<%--                    <li class="nav-item dropdown">--%>
+<%--                        <a class="nav-link dropdown-toggle" href="/posts" id="navbarDropdown" role="button"--%>
+<%--                           data-toggle="dropdown" aria-expanded="false">--%>
+<%--                            Bài đăng--%>
+<%--                        </a>--%>
+<%--                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">--%>
+<%--                            <a class="dropdown-item" href="/posts?action=create">Tạo mới bài viết</a>--%>
+<%--                            <a class="dropdown-item" href="/posts?action=search$&id=${p.user.id}">Các bài viết của--%>
+<%--                                mình</a>--%>
+<%--                        </div>--%>
+<%--                    </li>--%>
+<%--                </c:if>--%>
+<%--                <c:if test="${username != null && roleId==1}">--%>
+<%--                    <li class="nav-item dropdown">--%>
+<%--                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button"--%>
+<%--                           data-toggle="dropdown" aria-expanded="false">--%>
+<%--                            Quản lý--%>
+<%--                        </a>--%>
+<%--                        <div class="dropdown-menu" aria-labelledby="navbarDropdown1">--%>
+<%--                            <a class="dropdown-item" href="/users">Quản lý tài khoản</a>--%>
+<%--                            <a class="dropdown-item" href="/posts">Quản lý bài viết</a>--%>
+<%--                        </div>--%>
+<%--                    </li>--%>
+<%--                </c:if>--%>
+<%--            </ul>--%>
+<%--        </div>--%>
+<%--    </nav>--%>
+<%--</div>--%>
+<div class="container" style="overflow: auto">
     <div class="row">
         <!--    main  -->
         <div class="col-12">
             <form method="get">
                 <a href="/posts" class="col-3"><h1 style="display: inline">Tất cả bài viết</h1></a>
-                <a href="posts?action=searchTime" style="display: inline" class="col-4">Sắp xếp theo bài đăng mới nhất</a>
                 <input type="submit" value="search" name="action" style="display: inline; float: right">
                 <input type="text" name="title"
                        style="display: inline; float: right; width: 30%" placeholder="Nhập tiêu đề bạn muốn tìm">
@@ -130,10 +97,11 @@
                         <th>Mô tả</th>
                         <th>Thời gian</th>
                         <th>Trạng thái</th>
+                        <th></th>
                     </tr>
                     <c:forEach items="${post}" var="p">
                         <tr>
-                            <td>${p.user.username}</td>
+                            <td>${p.user.name}</td>
                             <td><a href="/post-details?id=${p.id}">${p.title} </a></td>
                             <td>${p.description}</td>
                             <td>${p.postDate}</td>
@@ -143,12 +111,17 @@
                             <c:if test="${p.status==1}">
                                 <td>Riêng tư</td>
                             </c:if>
-                            <c:if test="${roleId==1 ||p.user.id == userId}">
-                                <td>
+                            <td>
+                                <c:if test="${roleId==1 ||p.user.id == userId}">
                                     <a href="/posts?action=edit&id=${p.id}" class="btn btn-primary">Sửa</a>
                                     <a href="/posts?action=delete&id=${p.id}" class="btn btn-danger">Xóa</a></h1>
-                                </td>
-                            </c:if>
+                                </c:if>
+                                <a href="/comments?action=create&id=${p.id}" class="btn btn-light">Phản hồi</a>
+                                <a href="/comments?action=search&id=${p.id}" class="btn btn-light">Xem phản hồi</a>
+                                <c:if test="${comments ==0 && p.id==idFind}">
+                                    <span>${mess}</span>
+                                </c:if>
+                            </td>
                         </tr>
                     </c:forEach>
                 </table>
@@ -181,18 +154,5 @@
         </div>
     </div>
 </div>
-<%--<script>--%>
-<%--    function acceptDelete(id) {--%>
-<%--        if (confirm("Bạn có xác nhận khoá tài khoản này không")){--%>
-<%--            alert("Khoá thành công")--%>
-<%--            document.getElementById("delete" + id).submit();--%>
-<%--        }--%>
-<%--        else alert("Thất bại")--%>
-<%--    }--%>
-
-<%--    function acceptUnlock(id) {--%>
-<%--        document.getElementById("unlock" + id).submit();--%>
-<%--    }--%>
-<%--</script>--%>
 </body>
 </html>

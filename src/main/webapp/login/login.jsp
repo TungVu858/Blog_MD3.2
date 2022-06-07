@@ -28,7 +28,7 @@
                 <span style="color: red" class="text-center" >${mess}</span>
                 <span style="color: red" class="text-center" >${mess1}</span>
                 <input type="submit" value="Đăng nhập" class="btn-primary btn-block btn">
-                <a href="/index.jsp" class="btn-success btn btn-block">Trang chủ</a>
+                <a href="/" class="btn-success btn btn-block">Trang chủ</a>
             </form>
         </div>
     </div>

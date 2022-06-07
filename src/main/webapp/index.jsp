@@ -9,10 +9,7 @@
           integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-
-    <link rel="stylesheet" href="/assets/css/style.css"  type="text/css">
-    <link rel="shortcut icon" type="image/png" href="/favicon.png">
+    <link rel="stylesheet" href="assets/css/style.css">
 
 </head>
 <body>
@@ -25,22 +22,19 @@
             <div style="    margin-right: 2%;
     float: right;
     display: inline-block;">
-                <form action="/logins">
-                    <button class="btn btn-light">Đăng Nhập</button>
-                </form>
+                <a class="btn btn-light" href="/logins">Đăng Nhập</a>
             </div>
             <div style="    margin-right: 10px;
     display: inline-block;
     float: right;">
-                <form action="/registers">
-                    <button class="btn btn-primary">Đăng Ký</button>
-                </form>
+                    <a class="btn btn-primary" href="/registers">Đăng Ký</a>
             </div>
         </c:if>
         <c:if test="${username != null}">
-            <div style="    margin-right: 2%;float: right; display: inline-block;">
-
-                <a  href="/logins?action=logout"><button class="btn btn-success">Đăng Xuất</button></a>
+            <div style="    margin-right: 2%;
+    float: right;
+    display: inline-block;">
+                    <a class="btn btn-success" href="/logins?action=logout">Đăng Xuất</a>
             </div>
         </c:if>
     </nav>
@@ -83,22 +77,20 @@
                     </li>
                 </c:if>
             </ul>
-
-<%--            thẻ search--%>
-            <div style="    display: inline-block;float: right;">
+            <div style="    display: inline-block;
+    float: right;">
                 <form class="form-inline my-2 my-lg-0" method="get" action="posts">
                     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"
-                           name="title"
+                           name="action"
                     >
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="action"
-                    >Search
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="title">
+                        Search
                     </button>
                 </form>
             </div>
         </div>
     </nav>
 
-<%--    main--%>
 </div>
 
 <div class="container">
