@@ -27,14 +27,14 @@
             <div style="    margin-right: 10px;
     display: inline-block;
     float: right;">
-                    <a class="btn btn-primary" href="/registers">Đăng Ký</a>
+                <a class="btn btn-primary" href="/registers">Đăng Ký</a>
             </div>
         </c:if>
         <c:if test="${username != null}">
             <div style="    margin-right: 2%;
     float: right;
     display: inline-block;">
-                    <a class="btn btn-success" href="/logins?action=logout">Đăng Xuất</a>
+                <a class="btn btn-success" href="/logins?action=logout">Đăng Xuất</a>
             </div>
         </c:if>
     </nav>
@@ -79,14 +79,21 @@
             </ul>
             <div style="    display: inline-block;
     float: right;">
+
                 <form class="form-inline my-2 my-lg-0" method="get" action="posts">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"
-                           name="action"
-                    >
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="title">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Nhập tiêu đề bạn muốn tìm" aria-label="Search"
+                           name="title">
+
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="action">
                         Search
                     </button>
                 </form>
+
+
+
+
+
+
             </div>
         </div>
     </nav>

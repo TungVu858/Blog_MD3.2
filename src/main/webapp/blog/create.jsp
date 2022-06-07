@@ -27,109 +27,43 @@
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body id="navbar-toggle-button">
-<%--<div class="nav-fixed">--%>
-<%--    <nav class="logo">--%>
-<%--        <!--        đăng nhập, đăng kí-->--%>
-<%--        <c:if test="${name==null}">--%>
-<%--            <a href="/logins">Đăng nhập</a>--%>
-<%--            <a href="/registers">Đăng kí</a>--%>
-<%--        </c:if>--%>
-<%--        <c:if test="${name != null}">--%>
-<%--            <a href="/logins?action=logout">Đăng xuất</a>--%>
-<%--        </c:if>--%>
-<%--    </nav>--%>
-
-<%--    <nav class="navbar navbar-expand-lg navbar-light bg-light">--%>
-<%--        <a class="navbar-brand" href="/">Trang chủ</a>--%>
-<%--        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"--%>
-<%--                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">--%>
-<%--            <span class="navbar-toggler-icon"></span>--%>
-<%--        </button>--%>
-
-<%--        <div class="collapse navbar-collapse" id="navbarSupportedContent">--%>
-<%--            <ul class="navbar-nav mr-auto">--%>
-<%--                <c:if test="${name != null}">--%>
-<%--                    <li class="nav-item">--%>
-<%--                        <a class="nav-link" href="/logins?action=view">${name}</a>--%>
-<%--                    </li>--%>
-<%--                    <li class="nav-item dropdown">--%>
-<%--                        <a class="nav-link dropdown-toggle" href="/posts" id="navbarDropdown" role="button"--%>
-<%--                           data-toggle="dropdown" aria-expanded="false">--%>
-<%--                            Bài đăng--%>
-<%--                        </a>--%>
-<%--                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">--%>
-<%--                            <a class="dropdown-item" href="/posts?action=create">Tạo mới bài viết</a>--%>
-<%--                            <a class="dropdown-item" href="/posts?action=search$&id=${p.user.id}">Các bài viết của mình</a>--%>
-<%--                        </div>--%>
-<%--                    </li>--%>
-<%--                </c:if>--%>
-<%--                <c:if test="${name != null && roleId==1}">--%>
-<%--                    <li class="nav-item dropdown">--%>
-<%--                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button"--%>
-<%--                           data-toggle="dropdown" aria-expanded="false">--%>
-<%--                            Quản lý--%>
-<%--                        </a>--%>
-<%--                        <div class="dropdown-menu" aria-labelledby="navbarDropdown1">--%>
-<%--                            <a class="dropdown-item" href="/users">Quản lý tài khoản</a>--%>
-<%--                            <a class="dropdown-item" href="/posts">Quản lý bài viết</a>--%>
-<%--                        </div>--%>
-<%--                    </li>--%>
-<%--                </c:if>--%>
-<%--            </ul>--%>
-<%--        </div>--%>
-<%--    </nav>--%>
-<%--    <div class="container">--%>
-        <div class="row justify-content-around">
-            <form method="post" class="col-md-6 bg-light p-3 my-3" id="myForm">
-                <h1 class="text-center text-uppercase h3">Tạo bài viết mới</h1>
-                <input type="hidden" name="action" value="create">
-                <input type="hidden" name="id">
-                <input type="hidden" name="userId" value="${userId}">
-                <span class="form-control" type="text" name="name">${name}</span><br>
-                <div class="form-group">
-                    <label for="title">Tiêu đề</label>
-                    <input type="text" name="title" id="title" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label for="description">Mô tả</label>
-                    <input type="text" name="description" id="description" class="form-control">
-                </div>
-                <label for="content">Nội dung</label>
-                <div id="content"></div>
-                <textarea name="content" style="display:none;"></textarea>
-                <select name="status"><br>
-                    <option value="0"> Công khai</option>
-                    <option value="1"> Riêng tư</option>
-                </select>
-                <button class="btn btn-success">Gửi</button>
-            </form>
+<div class="container" style="margin-top: 0">
+<div class="" style="margin: 10px">
+    <a href="/" class="btn btn-primary">Trang chủ</a>
+</div>
+<div class="row">
+<div class="col-12">
+    <form method="post" class="col-12 " id="myForm">
+        <h1 class="text-center text-uppercase h3">Tạo bài viết mới</h1>
+        <input type="hidden" name="action" value="create">
+        <input type="hidden" name="id">
+        <input type="hidden" name="userId" value="${userId}">
+        <span class="form-control" type="text" name="name">${name}</span><br>
+        <div class="form-group">
+            <label for="title">Tiêu đề</label>
+            <input type="text" name="title" id="title" class="form-control">
         </div>
-<%--    </div>--%>
-<%--</div>--%>
-<%--<form method="post" id="myForm">--%>
-<%--    <c:if test="${name != null}">--%>
-<%--        <span class="form-control" type="text" name="name">${name}</span><br>--%>
-<%--        <h5>Title</h5>--%>
-<%--        <input type="hidden" name="userId" value="${roleId}">--%>
-<%--        <input type="text" name="title"><br>--%>
-<%--        <h5>Description</h5>--%>
-<%--        <input type="text" name="description"><br>--%>
-<%--        <div id="content"></div>--%>
-<%--        <textarea name="content" style="display:none;"></textarea>--%>
-<%--        <select name="status"><br>--%>
-<%--            <option value="0"> Public</option>--%>
-<%--            <option value="1"> Private</option>--%>
-<%--        </select>--%>
-<%--        <input type="submit"/>--%>
-<%--    </c:if>--%>
-<%--</form>--%>
+        <div class="form-group">
+            <label for="description">Mô tả</label>
+            <input type="text" name="description" id="description" class="form-control">
+        </div>
+        <label for="content">Nội dung</label>
+        <div id="content"></div>
+        <textarea name="content" style="display:none;"></textarea>
+        <select name="status"><br>
+            <option value="0"> Công khai</option>
+            <option value="1"> Riêng tư</option>
+        </select>
+        <button class="btn btn-success">Gửi</button>
+    </form>
+</div>
+</div>
+</div>
 </body>
 <script>
     $(document).ready(function () {
         $('#content').summernote();
 
-        // copy the html-text from summernote to the hidden textarea
-        // and let the browser submit it
         $('#myForm').submit(function () {
             $('textarea[name=content]').val($('#content').summernote('code'));
         });
