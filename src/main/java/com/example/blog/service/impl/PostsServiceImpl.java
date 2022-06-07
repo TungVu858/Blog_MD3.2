@@ -78,7 +78,7 @@ public class PostsServiceImpl implements com.example.blog.service.PostService {
     public List<Post> findAll() {
         List<Post> posts = new ArrayList<>();
         try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("select * from posts")) {
+             PreparedStatement preparedStatement = connection.prepareStatement("select * from posts order by postDate desc ")) {
             System.out.println(preparedStatement);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {

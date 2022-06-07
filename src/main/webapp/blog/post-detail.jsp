@@ -137,6 +137,13 @@
                     <input type="submit" class="btn btn-primary" value="Sửa"/>
                     <a href="/posts?action=delete&id=${p.id}" class="btn btn-danger">Xóa</a></h1>
                 </c:if>
+                <c:if test="${username != null}">
+                    <a href="/comments?action=create&id=${post.id}" class="btn btn-light">Phản hồi</a>
+                    <a href="/comments?action=search&id=${post.id}" class="btn btn-light">Xem phản hồi</a>
+                    <c:if test="${comments ==null && p.id==idFind}">
+                        <span>${mess}</span>
+                    </c:if>
+                </c:if>
             </form>
         </div>
 </div>

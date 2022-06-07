@@ -81,10 +81,10 @@
     float: right;">
                 <form class="form-inline my-2 my-lg-0" method="get" action="posts">
                     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"
-                           name="title"
+                           name="action"
                     >
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="action"
-                    >Search
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="title">
+                        Search
                     </button>
                 </form>
             </div>

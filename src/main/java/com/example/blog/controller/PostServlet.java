@@ -17,6 +17,7 @@ import java.util.List;
 public class PostServlet extends HttpServlet {
    PostsServiceImpl postsServiceImpl = new PostsServiceImpl();
    UserServiceImpl userService = new UserServiceImpl();
+   static int postId =0;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -72,25 +73,22 @@ public class PostServlet extends HttpServlet {
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("blog/edit.jsp");
         requestDispatcher.forward(request,response);
         response.sendRedirect("/posts");
-
-
     }
 
     private void showCreateForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("blog/create.jsp");
         requestDispatcher.forward(request,response);
-
-
     }
 
-    private void createForm(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+    private void createForm(HttpServletRequest request, HttpServletResponse response,HttpSession session) throws SQLException, IOException {
         User user = userService.findById(LoginServlet.currentId);
         String title = request.getParameter("title");
         String description =request.getParameter("description");
         String content =request.getParameter("content");
         LocalDateTime localDate = LocalDateTime.now();
         int status = Integer.parseInt(request.getParameter("status"));
-        postsServiceImpl.add(new Post(user,title,description,content,localDate,status));
+        Post post = new Post(user,title,description,content,localDate,status);
+        postsServiceImpl.add(post);
         response.sendRedirect("/");
     }
 
@@ -129,13 +127,14 @@ public class PostServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("utf-8");
         String action = request.getParameter("action");
+        HttpSession session = request.getSession();
         if(action == null){
             action ="";
         }
         switch (action){
             case"create":
                 try {
-                    createForm(request,response);
+                    createForm(request,response,session);
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
