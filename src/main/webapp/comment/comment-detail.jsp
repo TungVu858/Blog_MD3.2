@@ -34,9 +34,8 @@
                     <span name="postId" id="postId" class="form-control">${title}</span>
                 </div>
                 <c:forEach items="${comment}" var="c">
-                    <label for="userId">Người gửi</label>
-
-                    <span name="userId" id="userId" class="form-control">${c.userId.name}: ${c.content}</span>
+                    Người gửi
+                    <p name="userId" id="userId" >${c.userId.name}: ${c.content}</p>
                     <%--                <span class="form-control" name="content" id="content">${c.content}</span>--%>
                 </c:forEach>
             </form>
