@@ -59,6 +59,7 @@ public class CommentServlet extends HttpServlet {
         session.setAttribute("idFind",postId);
         if (comment !=null) {
             request.setAttribute("comment", comments);
+            session.setAttribute("title",comment.getPostId().getTitle());
             session.removeAttribute(String.valueOf(comments.size()));
             requestDispatcher.forward(request, response);
         }else {
@@ -109,6 +110,6 @@ public class CommentServlet extends HttpServlet {
         int status = Integer.parseInt(request.getParameter("status"));
         String content = request.getParameter("content");
         commentService.add(new Comment(user,post,localDate,status,content));
-        response.sendRedirect("/comments?action=search&id=postId");
+        response.sendRedirect("posts");
     }
 }

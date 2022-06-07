@@ -27,57 +27,57 @@
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-<div class="nav-fixed">
-    <nav class="logo">
-        <!--        đăng nhập, đăng kí-->
-        <c:if test="${name==null}">
-            <a href="/logins">Đăng nhập</a>
-            <a href="/registers">Đăng kí</a>
-        </c:if>
-        <c:if test="${name != null}">
-            <a href="/logins?action=logout">Đăng xuất</a>
-        </c:if>
-    </nav>
+<%--<div class="nav-fixed">--%>
+<%--    <nav class="logo">--%>
+<%--        <!--        đăng nhập, đăng kí-->--%>
+<%--        <c:if test="${name==null}">--%>
+<%--            <a href="/logins">Đăng nhập</a>--%>
+<%--            <a href="/registers">Đăng kí</a>--%>
+<%--        </c:if>--%>
+<%--        <c:if test="${name != null}">--%>
+<%--            <a href="/logins?action=logout">Đăng xuất</a>--%>
+<%--        </c:if>--%>
+<%--    </nav>--%>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="/">Trang chủ</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+<%--    <nav class="navbar navbar-expand-lg navbar-light bg-light">--%>
+<%--        <a class="navbar-brand" href="/">Trang chủ</a>--%>
+<%--        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"--%>
+<%--                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">--%>
+<%--            <span class="navbar-toggler-icon"></span>--%>
+<%--        </button>--%>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <c:if test="${name != null}">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/logins?action=view">${name}</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="/posts" id="navbarDropdown" role="button"
-                           data-toggle="dropdown" aria-expanded="false">
-                            Bài đăng
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="/posts?action=create">Tạo mới bài viết</a>
-                            <a class="dropdown-item" href="/posts?action=search$&id=${p.user.id}">Các bài viết của mình</a>
-                        </div>
-                    </li>
-                </c:if>
-                <c:if test="${name != null && roleId==1}">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button"
-                           data-toggle="dropdown" aria-expanded="false">
-                            Quản lý
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
-                            <a class="dropdown-item" href="/users">Quản lý tài khoản</a>
-                            <a class="dropdown-item" href="/posts">Quản lý bài viết</a>
-                        </div>
-                    </li>
-                </c:if>
-            </ul>
-        </div>
-    </nav>
+<%--        <div class="collapse navbar-collapse" id="navbarSupportedContent">--%>
+<%--            <ul class="navbar-nav mr-auto">--%>
+<%--                <c:if test="${name != null}">--%>
+<%--                    <li class="nav-item">--%>
+<%--                        <a class="nav-link" href="/logins?action=view">${name}</a>--%>
+<%--                    </li>--%>
+<%--                    <li class="nav-item dropdown">--%>
+<%--                        <a class="nav-link dropdown-toggle" href="/posts" id="navbarDropdown" role="button"--%>
+<%--                           data-toggle="dropdown" aria-expanded="false">--%>
+<%--                            Bài đăng--%>
+<%--                        </a>--%>
+<%--                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">--%>
+<%--                            <a class="dropdown-item" href="/posts?action=create">Tạo mới bài viết</a>--%>
+<%--                            <a class="dropdown-item" href="/posts?action=search$&id=${p.user.id}">Các bài viết của mình</a>--%>
+<%--                        </div>--%>
+<%--                    </li>--%>
+<%--                </c:if>--%>
+<%--                <c:if test="${name != null && roleId==1}">--%>
+<%--                    <li class="nav-item dropdown">--%>
+<%--                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button"--%>
+<%--                           data-toggle="dropdown" aria-expanded="false">--%>
+<%--                            Quản lý--%>
+<%--                        </a>--%>
+<%--                        <div class="dropdown-menu" aria-labelledby="navbarDropdown1">--%>
+<%--                            <a class="dropdown-item" href="/users">Quản lý tài khoản</a>--%>
+<%--                            <a class="dropdown-item" href="/posts">Quản lý bài viết</a>--%>
+<%--                        </div>--%>
+<%--                    </li>--%>
+<%--                </c:if>--%>
+<%--            </ul>--%>
+<%--        </div>--%>
+<%--    </nav>--%>
         <div class="row justify-content-around">
             <form method="post" class="col-md-6 bg-light p-3 my-3" id="myForm">
                 <h1 class="text-center text-uppercase h3">Sửa bài viết</h1>

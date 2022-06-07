@@ -116,10 +116,10 @@
                                     <a href="/posts?action=edit&id=${p.id}" class="btn btn-primary">Sửa</a>
                                     <a href="/posts?action=delete&id=${p.id}" class="btn btn-danger">Xóa</a></h1>
                                 </c:if>
-                                <a href="/comments?action=create&id=${p.id}" class="btn btn-light">Phản hồi</a>
-                                <a href="/comments?action=search&id=${p.id}" class="btn btn-light">Xem phản hồi</a>
+                                <a href="/comments?action=create&id=${p.id}" class="btn btn-secondary">Phản hồi</a>
+                                <a href="/comments?action=search&id=${p.id}" class="btn btn-secondary">Xem phản hồi</a>
                                 <c:if test="${comments ==0 && p.id==idFind}">
-                                    <span>${mess}</span>
+                                    <span style="color: red">${mess}</span>
                                 </c:if>
                             </td>
                         </tr>
